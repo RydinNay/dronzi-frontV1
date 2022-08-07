@@ -4,7 +4,7 @@ import Drons from "../pages/Drons/Drons";
 import Info from "../pages/Info";
 import Main from "../pages/Main";
 import Registration from "../pages/Registration";
-import Tasks from "../pages/Tasks";
+import Tasks from "../pages/Tasks/Tasks";
 import DronsOnTasks from "../pages/DronsOnTasks/DronsOnTasks";
 
 

@@ -1,5 +1,5 @@
 const initialState = {
-    selectedTaks: []
+    selectedTask: []
 };
 
 export default function tasks(state = initialState, action) {
@@ -9,7 +9,7 @@ export default function tasks(state = initialState, action) {
         case 'PUT_SELECTED_TAKS':
             return {
                 ...state,
-                selectedTaks: payload
+                selectedTask: payload
             }
         default:
             return state;

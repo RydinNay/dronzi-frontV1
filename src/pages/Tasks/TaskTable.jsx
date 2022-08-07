@@ -2,39 +2,39 @@ import React, {useEffect} from 'react'
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-function DronsTable(drons) {
+function TasksTable(tasks) {
     const [CheckIsDronGenderFilter, setCheckIsDronGenderValue] = React.useState(false);
     
-    const { selectedDron } = useSelector(state => ({
-        selectedDron: state.drons.selectedDron
+    const { selectedTask } = useSelector(state => ({
+        selectedTask: state.tasks.selectedTask
     }), shallowEqual)
 
     const dispatch = useDispatch();
 
 
-        const isOccupied = (dron)=>{
-            if(dron.IsOccupied)
+        const isOccupied = (task)=>{
+            if(task.IsOccupied)
                 return 'yes'
             else return 'no'
         }
 
-        const selectedDrons = (e)=>{
+        const selectedTasks = (e)=>{
 
             if(e.target.checked){
-                selectedDron.push(parseInt(e.target.id))
+                selectedTask.push(parseInt(e.target.id))
             }
             else{                
-                let i = selectedDron.length - 1
-                while(parseInt(e.target.id) !== selectedDron[i]){
+                let i = selectedTask.length - 1
+                while(parseInt(e.target.id) !== selectedTask[i]){
                     i = i-1
                 }
-                selectedDron.splice(i, 1) 
+                selectedTask.splice(i, 1) 
             }
-                console.log(selectedDron)            
+                console.log(selectedTask)            
 
             dispatch({
-                type:'PUT_SELECTED_DRONS',
-                payload: selectedDron
+                type:'PUT_SELECTED_TAKS',
+                payload: selectedTask
             })     
             
         }
@@ -48,31 +48,33 @@ function DronsTable(drons) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Modle</th>
-                <th>EnergyCapacity</th>
+                <th>Description</th>
+                <th>Distation</th>
                 <th>IsOccupied</th>
-                <th>LiftingCapacity</th>
+                <th>Weight</th>
+                <th>Date</th>
                 <th>selected</th>
             </tr>
         </thead>
         <tbody id='table1'>
         { 
-            drons.allDrons.map(dron => 
+            tasks.allTasks.map(task => 
                 
-                    <tr key={dron.Dronid}>
-                        <td>{dron.Dronid}</td>
-                        <td>{dron.DronModle}</td>
-                        <td>{dron.EnergyCapacity}</td>
-                        <td>{isOccupied(dron)}</td>
-                        <td>{dron.LiftingCapacity}</td>
+                    <tr key={task.Taskid}>
+                        <td>{task.Taskid}</td>
+                        <td>{task.TaskDesc}</td>
+                        <td>{task.Dist}</td>
+                        <td>{isOccupied(task)}</td>
+                        <td>{task.Weight}</td>
+                        <td>{task.Date}</td>
                         <td>
                             
                             <Form.Check 
                                 label="select"
                                 type="checkbox"
-                                id={dron.Dronid}
+                                id={task.Taskid}
                                 value={CheckIsDronGenderFilter}
-                                onChange={(e)=>{selectedDrons(e)}}
+                                onChange={(e)=>{selectedTasks(e)}}
                             />
                             
                         </td>
@@ -88,4 +90,4 @@ function DronsTable(drons) {
     )
 }
 
-export default DronsTable
+export default TasksTable
