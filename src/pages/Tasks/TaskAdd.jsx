@@ -3,26 +3,20 @@ import axios from 'axios'
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 
 function TaskAdd({show, onHide}) {
-    const [modle, setModle] = React.useState(null)
-    const [energy, setEnergy] = React.useState(null)
-    const [lifting, setLifting] = React.useState(null)
+    const [description, setDescription] = React.useState(null)
+    const [distants, setDistants] = React.useState(null)
+    const [weight, setWeight] = React.useState(null)
 
     const baseURL = "http://127.0.0.1:5000/Tasks/add";
 
-    const parseToInt = () => {
-        try{parseInt(modle)}
-        catch{console.log('you enter the incorrect value')}
-    }
     let catcherrors = null
-
     
-    const addDron=()=>{
-        
+    const addTask=()=>{
 
-        if(!isNaN(energy) && !isNaN(lifting)){
+        if(!isNaN(weight) && !isNaN(distants)){
 
         axios.post(baseURL, 
-            {"modle":modle, "ecapacity":energy, "lcapacity":lifting, "baseid":1}, {headers:{"Content-Type": "application/json"}} 
+            {"desc":description, "dist":distants, "weight":weight, "clientid":1}, {headers:{"Content-Type": "application/json"}} 
             ).
             then((response) => {
             
@@ -34,10 +28,9 @@ function TaskAdd({show, onHide}) {
         });
         onHide()
         }else
-            console.log('is not int', modle)
+            console.log('is not int', description)
         
     }
-
     
 
   return (
@@ -48,25 +41,25 @@ function TaskAdd({show, onHide}) {
     aria-labelledby="example-modal-sizes-title-lg"
     >
         <Modal.Header closeButton onClick={onHide}>
-            <Modal.Title>Drons Add Form</Modal.Title>
+            <Modal.Title>Task Add Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Card className="">
                 <Container className="m-1 me-auto ms-auto">
                 <Form>
                     <Form.Group className="mb-3" controlId="formDronModle">
-                        <Form.Label>Dron Modle</Form.Label>
-                        <Form.Control type="text" placeholder="Dron modle" onChange={e => setModle(e.target.value)}/>
+                        <Form.Label>Task description</Form.Label>
+                        <Form.Control type="text" placeholder="Task Description" onChange={e => setDescription(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formEnergyCap">
                         <Form.Label>EnergyCapacity</Form.Label>
-                        <Form.Control type="text" placeholder="How long can dron fly" onChange={e => setEnergy(e.target.value)}/>
+                        <Form.Control type="text" placeholder="How long can dron fly" onChange={e => setDistants(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formLiftingCap">
                         <Form.Label>LiftingCapacity</Form.Label>
-                        <Form.Control type="text" placeholder="How mach can lift this dron" onChange={e => setLifting(e.target.value)}/>
+                        <Form.Control type="text" placeholder="How mach can lift this dron" onChange={e => setWeight(e.target.value)}/>
                     </Form.Group>
                     </Form>
                 </Container>
@@ -74,8 +67,8 @@ function TaskAdd({show, onHide}) {
             </Card>
         </Modal.Body>
         <Modal.Footer>
-            <Button variant="primary" onClick={() => addDron()}>
-                Add dron
+            <Button variant="primary" onClick={() => addTask()}>
+                Add task
             </Button>
             
         </Modal.Footer>

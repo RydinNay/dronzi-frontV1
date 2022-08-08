@@ -39,7 +39,6 @@ function DronsChange({show, onHide, allDrons}) {
 
     
     const handleClick = () => {
-
         console.log(selectedDrons)    
     }
 
@@ -57,7 +56,6 @@ function DronsChange({show, onHide, allDrons}) {
         }
         console.log(allDrons.find(id => id.Dronid === formId))
     })
-
 
     console.log(selectedDrons)
     console.log(allDrons)

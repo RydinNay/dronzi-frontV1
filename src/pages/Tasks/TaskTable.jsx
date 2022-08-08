@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -39,8 +39,6 @@ function TasksTable(tasks) {
             
         }
         
-        //console.log(selectedDron)            
-
   return (
     <Container>
     <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >

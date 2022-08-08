@@ -3,7 +3,7 @@ import { Button, Form, Modal, Table, Card, Container, FormControl } from 'react-
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
-function TaskChange({show, onHide, allDrons}) {
+function TaskChange({show, onHide, allTasks}) {
     const dispatch = useDispatch();
 
     const { selectedTasks } = useSelector(state => ({
@@ -17,9 +17,9 @@ function TaskChange({show, onHide, allDrons}) {
             payload: []
           })
     
-        for(var i=0; i<allDrons.length; ++i)
+        for(var i=0; i<allTasks.length; ++i)
         {
-            var boxes = document.getElementById(allDrons[i].Dronid);
+            var boxes = document.getElementById(allTasks[i].Taskid);
             boxes.checked = false;  
         }
         onHide()
@@ -29,7 +29,7 @@ function TaskChange({show, onHide, allDrons}) {
     const AplyChanges=(() => {
         for(var i = 0; i < selectedTasks.length; ++i){
             //console.log(allDrons.find(id => id.Dronid === formId))
-            axios.put('http://127.0.0.1:5000/Dron', {dronid: allDrons.find(id => id.Dronid === selectedTasks[i]).Dronid, ecapacity: allDrons.find(id => id.Dronid === selectedTasks[i]).EnergyCapacity, lcapacity: allDrons.find(id => id.Dronid === selectedTasks[i]).LiftingCapacity}).then((response) => {
+            axios.put('http://127.0.0.1:5000/Dron', {dronid: allTasks.find(id => id.Taskid === selectedTasks[i]).Taskid, ecapacity: allTasks.find(id => id.Taskid === selectedTasks[i]).Dist, lcapacity: allTasks.find(id => id.Taskid === selectedTasks[i]).Weight}).then((response) => {
                 console.log(response.data)
             }
             )
@@ -46,21 +46,21 @@ function TaskChange({show, onHide, allDrons}) {
     //const [drons, setDrons] = React.useState(make_users)
 
     const setEdits=((value, formId, edit) =>{
-        console.log(allDrons.find(id => id.Dronid === formId))
+        console.log(allTasks.find(id => id.Taskid === formId))
         switch(edit){
-            case('ecap'):allDrons.find(id => id.Dronid === formId).EnergyCapacity = value 
+            case('dist'):allTasks.find(id => id.Taskid === formId).Dist = value 
                 break
             
-            case('lcap'):allDrons.find(id => id.Dronid === formId).LiftingCapacity = value  
+            case('weight'):allTasks.find(id => id.Taskid === formId).Weight = value  
                 break
 
         }
-        console.log(allDrons.find(id => id.Dronid === formId))
+        console.log(allTasks.find(id => id.Taskid === formId))
     })
 
 
-    console.log(selectedTasks)
-    console.log(allDrons)
+    //console.log(selectedTasks)
+    //console.log(allTasks)
 
     return (
     <Modal  onHide={Close}
@@ -79,20 +79,20 @@ function TaskChange({show, onHide, allDrons}) {
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Energy Capacity</th>
-                                <th>Lifting Capacity</th>
-                                <th>Dron Modle</th>
+                                <th>Distans</th>
+                                <th>Weight Capacity</th>
+                                <th>Description</th>
                             </tr>
                         </thead>
                         <tbody>
                         
                         {(selectedTasks)?
                             selectedTasks.map((taskId) => (
-                            <tr key={allDrons.find(id => id.Dronid === taskId).Dronid}>
-                                <td>{allDrons.find(id => id.Dronid === taskId).Dronid}</td>
-                                <td><FormControl type="text" placeholder={allDrons.find(id => id.Dronid === taskId).EnergyCapacity} defaultValue={allDrons.find(id => id.Dronid === taskId).EnergyCapacity} onChange={e => setEdits(e.target.value, taskId, 'ecap')}/></td>
-                                <td><FormControl type="text" placeholder={allDrons.find(id => id.Dronid === taskId).LiftingCapacity} defaultValue={allDrons.find(id => id.Dronid === taskId).LiftingCapacity} onChange={e => setEdits(e.target.value, taskId, 'lcap')}/></td>
-                                <td>{allDrons.find(id => id.Dronid === taskId).DronModle}</td>
+                            <tr key={allTasks.find(id => id.Taskid === taskId).Taskid}>
+                                <td>{allTasks.find(id => id.Taskid === taskId).Taskid}</td>
+                                <td><FormControl type="text" placeholder={allTasks.find(id => id.Taskid === taskId).Dist} defaultValue={allTasks.find(id => id.Taskid === taskId).Dist} onChange={e => setEdits(e.target.value, taskId, 'ecap')}/></td>
+                                <td><FormControl type="text" placeholder={allTasks.find(id => id.Taskid === taskId).Weight} defaultValue={allTasks.find(id => id.Taskid === taskId).Weight} onChange={e => setEdits(e.target.value, taskId, 'lcap')}/></td>
+                                <td>{allTasks.find(id => id.Taskid === taskId).TaskDesc}</td>
                             </tr>
                             ))
                             :

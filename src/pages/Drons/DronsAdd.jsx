@@ -9,12 +9,7 @@ function DronsAdd({show, onHide}) {
 
     const baseURL = "http://127.0.0.1:5000/Dron";
 
-    const parseToInt = () => {
-        try{parseInt(modle)}
-        catch{console.log('you enter the incorrect value')}
-    }
     let catcherrors = null
-
     
     const addDron=()=>{
         
@@ -37,8 +32,6 @@ function DronsAdd({show, onHide}) {
             console.log('is not int', modle)
         
     }
-
-    
 
   return (
     <Modal  onHide={onHide}

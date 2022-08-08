@@ -12,7 +12,7 @@ function Tasks() {
   const [tasks, setTasks] = React.useState(null);
 
   const { selectedTasks } = useSelector(state => ({
-    selectedTasks: state.drons.selectedTask
+    selectedTasks: state.tasks.selectedTask
   }), shallowEqual)
 
   useEffect(() => {
@@ -23,13 +23,13 @@ function Tasks() {
     
   }, [])
 
-
+  //console.log(tasks)
 
   const refreshTable=() => {
 
     for(var i=0; i<tasks.length; ++i)
     {
-        var boxes = document.getElementById(tasks[i].Dronid);
+        var boxes = document.getElementById(tasks[i].Taskid);
         boxes.checked = false;  
     }
     axios.get(baseURL, {params:{"clientid": 1}}).then((response) => {
@@ -44,12 +44,14 @@ function Tasks() {
 
   const [changeFormIsVisible, setChangeFormVisible] = React.useState(false)
   const [addFormIsVisible, setAddFormVisible] = React.useState(false)
+  console.log(selectedTasks)
 
-  const deleteDron = () =>{
+  const deleteTask = () =>{
+    console.log(selectedTasks)
+
     for(var i=0; i < selectedTasks.length; ++i){
-      //console.log(selectedDrons[i])
-      console.log(tasks.find(id => id.Taskid === selectedTasks[i]).Dronid)
-      axios.delete('http://127.0.0.1:5000/Tasks/remove', {params:{"taskid": tasks.find(id => id.Dronid === selectedTasks[i]).Dronid}}, {headers:{"Content-Type": "application/json"}}).then((response) => {
+      console.log(tasks.find(id => id.Taskid === selectedTasks[i]).Taskid)
+      axios.delete('http://127.0.0.1:5000/Tasks/remove', {params:{"taskid": tasks.find(id => id.Taskid === selectedTasks[i]).Taskid}}, {headers:{"Content-Type": "application/json"}}).then((response) => {
         console.log(response.data)
       })
     }
@@ -68,15 +70,15 @@ function Tasks() {
         </Container>
 
         <Container className="ms-auto">
-          <Button variant="secondary" onClick={() => (setChangeFormVisible(true))} className="ms-auto me-2">
+          {/*<Button variant="secondary" onClick={() => (setChangeFormVisible(true))} className="ms-auto me-2">
               Edit selected dron
           </Button>
-
+          */}
           <Button variant="secondary" onClick={() => (setAddFormVisible(true))} className="ms-auto me-2">
               Add dron
           </Button>
 
-          <Button variant="secondary" onClick={() => (deleteDron())} className="ms-auto me-2">
+          <Button variant="secondary" onClick={() => (deleteTask())} className="ms-auto me-2">
               Delete selected drons
           </Button>
         </Container>
@@ -86,9 +88,9 @@ function Tasks() {
         </Button>
         
       </Card>
-
+    {/*
       <TaskChange show={changeFormIsVisible} onHide={() => setChangeFormVisible(false)} allTasks={tasks}/>
-
+  */}
       <TaskAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)}/>
 
 
