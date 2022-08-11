@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { userRoutes, publicRoutes, clientRoutes, adminRoutes } from "./routes";
 import { observer } from "mobx-react-lite";

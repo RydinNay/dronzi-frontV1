@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { Container, Button, Card } from 'react-bootstrap'
 import DronsOnTaskAdd from './DronsOnTaskAdd'
-import DronsOnTasksTable from './DronsOnTaskTable'
+import DronsOnTasksTable_for_User from './DronsOnTaskTable_for_User';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 
-function DronsOnTasks() {
+function DronsOnTasks_for_User() {
   const baseURL = "http://127.0.0.1:5000/Drons_on_Tasks/select/user"
 
   const { selectedDron } = useSelector(state => ({
@@ -101,7 +101,7 @@ function DronsOnTasks() {
       <Card className="">
         <Container className="m-2 me-auto ms-auto">
 
-          <DronsOnTasksTable dronOnTask={dronOnTask} tasks={tasks} drons={drons}/>
+          <DronsOnTasksTable_for_User dronOnTask={dronOnTask} tasks={tasks} drons={drons}/>
 
         </Container>
 
@@ -128,4 +128,4 @@ function DronsOnTasks() {
     )
 }
 
-export default DronsOnTasks
+export default DronsOnTasks_for_User

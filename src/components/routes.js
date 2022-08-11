@@ -1,14 +1,14 @@
-import Admin from "../pages/Admin";
+import Admin from "../pages/Admin/Admin";
 import Contacts from "../pages/Contacts";
 import Drons from "../pages/Drons/Drons";
 import Info from "../pages/Info";
 import Main from "../pages/Main";
 import Registration from "../pages/Registration";
 import Tasks from "../pages/Tasks/Tasks";
-import DronsOnTasks from "../pages/DronsOnTasks/DronsOnTasks";
+import DronsOnTasks_for_User from "../pages/DronsOnTasks_for_User/DronsOnTasks_for_User";
+import DronsOnTasks_for_Client from "../pages/DronsOnTasks_for_Client/DronsOnTasks_for_Client";
 
-
-import { ADMIN_ROUTE, CONTACTS_ROUTE, DRONS_ROUTE, INFO_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE, DRONS_ON_TASKS_ROUTE } from "../utils/consts";
+import { ADMIN_ROUTE, CONTACTS_ROUTE, DRONS_ROUTE, INFO_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE, TASKS_ROUTE, DRONS_ON_TASKS_ROUTE_User, DRONS_ON_TASKS_ROUTE_Client } from "../utils/consts";
 
 export const publicRoutes = [
     {
@@ -35,8 +35,8 @@ export const clientRoutes = [
         Component: <Tasks/>
     },
     {
-        path: DRONS_ON_TASKS_ROUTE,
-        Component: <DronsOnTasks/>
+        path: DRONS_ON_TASKS_ROUTE_Client,
+        Component: <DronsOnTasks_for_Client/>
     }
 ]
 
@@ -46,8 +46,8 @@ export const userRoutes = [
         Component: <Drons/>
     },
     {
-        path: DRONS_ON_TASKS_ROUTE,
-        Component: <DronsOnTasks/>
+        path: DRONS_ON_TASKS_ROUTE_User,
+        Component: <DronsOnTasks_for_User/>
     }
 ]
 

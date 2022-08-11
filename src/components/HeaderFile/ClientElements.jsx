@@ -14,7 +14,7 @@ function ClientElements() {
 
         <Dropdown.Menu>
             <Dropdown.Item onClick={()=>navigate('/tasks')}>Inspect Tasks</Dropdown.Item>
-            <Dropdown.Item onClick={()=>navigate('/drons_on_tasks')}>Inspect Drons On Tasks</Dropdown.Item>
+            <Dropdown.Item onClick={()=>navigate('/drons_on_tasks(client)')}>Inspect Drons On Tasks</Dropdown.Item>
         </Dropdown.Menu>
     </Dropdown>
   )

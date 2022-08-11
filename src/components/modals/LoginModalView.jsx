@@ -1,11 +1,18 @@
-import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import userStore from '../../store/UserStore'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function LoginModalView({show, onHide}) {
+  const dispatch = useDispatch()
   const [CheckIsUserGenderFilter, setCheckIsUserGenderValue] = React.useState(false);
   const [CheckIsAdminGenderFilter, setCheckIsAdminGenderValue] = React.useState(false);
+  const [userEmail, setUserEmail] = React.useState()
+  const [userPass, setUserPass] = React.useState()
+
+  const { user } = useSelector(state => ({
+    selectedDron: state.users.users
+  }), shallowEqual)
 
     const handleClick = () => {
         userStore.setIsAuth(true)
@@ -15,6 +22,11 @@ function LoginModalView({show, onHide}) {
               userStore.setIsAdmin(true)
           }
         }
+
+        dispatch({
+          type:'PUT_USERS',
+          payload: user
+        })
 
         onHide()
     }
@@ -45,26 +57,7 @@ function LoginModalView({show, onHide}) {
                 />
                 </Form.Group>
             </Form>
-            <Form>
-                
-                <Form.Check 
-                    type="checkbox"
-                    id={`1`}
-                    label={`Is User`}
-                    value={CheckIsUserGenderFilter}
-                    onChange={(e)=>{setCheckIsUserGenderValue(e.target.checked)}}
-                />
-                <Form.Check 
-                    type="checkbox"
-                    id={`2`}
-                    label={`Is Admin`}
-                    value={CheckIsAdminGenderFilter}
-                    onChange={(e)=>{setCheckIsAdminGenderValue(e.target.checked)}}
-                    
-                />
-
-                
-            </Form>
+            
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onHide}>

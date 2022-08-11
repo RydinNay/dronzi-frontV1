@@ -2,7 +2,11 @@ import React from 'react'
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-function DronsOnTasksTable({dronOnTask, tasks, drons}) {
+function AdminTable({droneBase, users}) {
+
+    console.log(droneBase)
+    console.log(users)
+
     const [CheckIsDronGenderFilter, setCheckIsDronGenderValue] = React.useState(false);
 
     const { selectedDronsOnTasks } = useSelector(state => ({
@@ -40,38 +44,31 @@ function DronsOnTasksTable({dronOnTask, tasks, drons}) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>DronId</th>
-                <th>EnergyCapacity</th>
-                <th>LitfingCapacity</th>
-                <th>TaskId</th>
-                <th>TaskDist</th>
-                <th>TaskWeight</th>
-                <th>TaskDesc</th>
-                <th>Date</th>
-                <th>selected</th>
+                <th>UserName</th>
+                <th>UserTel</th>
+                <th>UserEmail</th>
+                <th>UserDronBaseid</th>
+                <th>DronBaseName</th>
+                <th>Selected</th>
             </tr>
         </thead>
         <tbody id='table1'>
         { 
-            dronOnTask.map(drontask => 
+            users.map(user => 
                 
-                    <tr key={drontask.DronTaskid}>
-                        <td>{drontask.DronTaskid}</td>
-                        <td>{drontask.DoTDronid}</td>
-                        <td>{drons.find(ecap => ecap.Dronid === drontask.DoTDronid).EnergyCapacity}</td>
-                        <td>{drons.find(lcap => lcap.Dronid === drontask.DoTDronid).LiftingCapacity}</td>
-                        <td>{drontask.DoTTaskid}</td>
-                        <td>{tasks.find(dist => dist.Taskid === drontask.DoTTaskid).Dist}</td>
-                        <td>{tasks.find(weight => weight.Taskid === drontask.DoTTaskid).Weight}</td>
-                        <td>{tasks.find(taskdesc => taskdesc.Taskid === drontask.DoTTaskid).TaskDesc}</td>
-                        
-                        <td>{drontask.Date}</td>
+                    <tr key={user.Userid}>
+                        <td>{user.Userid}</td>
+                        <td>{user.UserName}</td>
+                        <td>{user.UserTel}</td>
+                        <td>{user.UserEmail}</td>
+                        <td>{user.UserDronBaseid}</td>
+                        <td>{droneBase.find(id => id.DronBaseid === user.UserDronBaseid).CompanyName}</td>
                         <td>
                             
                             <Form.Check 
                                 label="select"
                                 type="checkbox"
-                                id={drontask.DronTaskid}
+                                id={user.Userid}
                                 value={CheckIsDronGenderFilter}
                                 onChange={(e)=>{selectedDrons(e)}}
                             />
@@ -89,4 +86,4 @@ function DronsOnTasksTable({dronOnTask, tasks, drons}) {
     )
 }
 
-export default DronsOnTasksTable
+export default AdminTable
