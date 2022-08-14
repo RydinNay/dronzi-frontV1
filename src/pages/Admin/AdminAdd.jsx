@@ -3,35 +3,20 @@ import axios from 'axios'
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-function AdminAdd({show, onHide}) {
-    const [modle, setModle] = React.useState(null)
-    const [energy, setEnergy] = React.useState(null)
-    const [lifting, setLifting] = React.useState(null)
-
-    const baseURL = "http://127.0.0.1:5000/Dron";
-
-    let catcherrors = null
-    
+function AdminAdd({show, onHide, user}) {
+    const [userName, setUserName] = React.useState()
+    const [userEmail, setUserEmail] = React.useState()
+    const [userPass, setUserPass] = React.useState()
+    const [userTel, setUserTel] = React.useState()
     const addDron=()=>{
-        
-
-        if(!isNaN(energy) && !isNaN(lifting)){
-
-        axios.post(baseURL, 
-            {"modle":modle, "ecapacity":energy, "lcapacity":lifting, "baseid":1}, {headers:{"Content-Type": "application/json"}} 
-            ).
-            then((response) => {
-            
-            catcherrors = (response.data);
-            console.log(catcherrors)
+        axios.post("http://127.0.0.1:5000/Users/register", {"username": userName, "email": userEmail, "telephon": userTel, "password": userPass, 
+        "roleid": 2, "baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
+          ).then((response) => {
+                console.log(response.data)
+            }).catch((error) => {
+                console.log(error)
             })
-            .catch((error) => {
-            console.log(error)
-        });
         onHide()
-        }else
-            console.log('is not int', modle)
-        
     }
 
   return (
@@ -47,22 +32,36 @@ function AdminAdd({show, onHide}) {
         <Modal.Body>
             <Card className="">
                 <Container className="m-1 me-auto ms-auto">
-                <Form>
-                    <Form.Group className="mb-3" controlId="formDronModle">
-                        <Form.Label>Dron Modle</Form.Label>
-                        <Form.Control type="text" placeholder="Dron modle" onChange={e => setModle(e.target.value)}/>
-                    </Form.Group>
+                  <Form>
 
-                    <Form.Group className="mb-3" controlId="formEnergyCap">
-                        <Form.Label>EnergyCapacity</Form.Label>
-                        <Form.Control type="text" placeholder="How long can dron fly" onChange={e => setEnergy(e.target.value)}/>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                      <Form.Label>Enter user name</Form.Label>
+                      <Form.Control
+                          type="text"
+                          placeholder="name@example.com"
+                          onChange={e => setUserName(e.target.value)}
+                      />
+                      
+                      <Form.Label>Enter user email adress</Form.Label>
+                      <Form.Control
+                          type="text"
+                          placeholder="****@gmail.com"
+                          onChange={e => setUserEmail(e.target.value)}
+                      />
+                      <Form.Label>Enter user password</Form.Label>
+                      <Form.Control
+                          type="password"
+                          placeholder="pass"
+                          onChange={e => setUserPass(e.target.value)}
+                      />
+                      <Form.Label>Enter user telephone</Form.Label>
+                      <Form.Control
+                          type="text"
+                          placeholder="+380*****"
+                          onChange={e => setUserTel(e.target.value)}
+                      />
                     </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formLiftingCap">
-                        <Form.Label>LiftingCapacity</Form.Label>
-                        <Form.Control type="text" placeholder="How mach can lift this dron" onChange={e => setLifting(e.target.value)}/>
-                    </Form.Group>
-                    </Form>
+                  </Form>
                 </Container>
                 
             </Card>

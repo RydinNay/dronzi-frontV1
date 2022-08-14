@@ -8,9 +8,10 @@ import axios from 'axios'
 function Admin() {
   const baseURL = "http://127.0.0.1:5000/Dron_Base"
 
-  const { selectedDron } = useSelector(state => ({
-    selectedDron: state.drons_on_tasks.selectedDronsOnTasks
+  const { user } = useSelector(state => ({
+    user: state.users.user
   }), shallowEqual)
+  
 
   //console.log(selectedDron)
 
@@ -21,42 +22,43 @@ function Admin() {
   const [users, setUser] = React.useState(null);
 
   useEffect(() => {
-    axios.get(baseURL, {params:{"baseid": 1}}).then((response) => {
+    axios.get(baseURL, {params:{"baseid": user.dron_baseid}}).then((response) => {
         setDronBase(response.data)
     })
     
   }, [])
 
+  const { selectedUsers } = useSelector(state => ({
+    selectedUsers: state.users.selectedUser
+  }), shallowEqual)
+
   useEffect(() => {
     
-    axios.get("http://127.0.0.1:5000/Users/all", {params:{"baseid": 1}}).then((response) => {
+    axios.get("http://127.0.0.1:5000/Users/all", {params:{"baseid": user.dron_baseid}}).then((response) => {
         setUser(response.data)
     })
     
     
   }, [])
 
-  console.log(droneBase)
-  console.log(users)
-
   const refreshTable=() => {
     
-      for(var i=0; i<droneBase.length; ++i)
+      for(var i=0; i<users.length; ++i)
       {
-          var boxes = document.getElementById(droneBase[i].DronTaskid);
+          var boxes = document.getElementById(users[i].Userid);
           boxes.checked = false;  
       }
-      axios.get(baseURL, {params:{"baseid": 1}}).then((response) => {
+      axios.get(baseURL, {params:{"baseid": user.dron_baseid}}).then((response) => {
         setDronBase(response.data)
       })
 
-      axios.get("http://127.0.0.1:5000/Users/all", {params:{"baseid": 1}}).then((response) => {
+      axios.get("http://127.0.0.1:5000/Users/all", {params:{"baseid": user.dron_baseid}}).then((response) => {
         setUser(response.data)
       })
 
     
       dispatch({
-        type:'PUT_SELECTED_DRONS_ON_TASKS',
+        type:'SELECT_USER',
         payload: []
       })
         
@@ -65,17 +67,17 @@ function Admin() {
   const [addFormIsVisible, setAddFormVisible] = React.useState(false)
 
 
-  const deleteDron = () =>{
-    for(var i=0; i < selectedDron.length; ++i){
+  const deleteUser = () =>{
+    for(var i=0; i < selectedUsers.length; ++i){
       //console.log(dronOnTask.find(id => id.DronTaskid === selectedDron[i]))
-      axios.delete('http://127.0.0.1:5000/Dron_Base', {params:{"dron_on_taskid": droneBase.find(id => id.DronTaskid === selectedDron[i]).DronTaskid}}, {headers:{"Content-Type": "application/json"}}).then((response) => {
+      axios.delete('http://127.0.0.1:5000/Users/remove', {params:{"Userid": users.find(id => id.Userid === selectedUsers[i]).Userid}}, {headers:{"Content-Type": "application/json"}}).then((response) => {
         console.log(response.data)
       })
     }
 
     refreshTable()
   }
-  
+
   if (!droneBase ) return null;
   if (!users) return null
 
@@ -99,7 +101,7 @@ function Admin() {
               Add dron base on task
           </Button>
 
-          <Button variant="secondary" onClick={() => (deleteDron())} className="ms-auto me-2">
+          <Button variant="secondary" onClick={() => (deleteUser())} className="ms-auto me-2">
               Delete selected dron base on task
           </Button>
         </Container>
@@ -110,7 +112,7 @@ function Admin() {
         
       </Card>
 
-      <AdminAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)} droneBase={droneBase} users={users}/>
+      <AdminAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)} user={user}/>
 
     </Container>  
     )

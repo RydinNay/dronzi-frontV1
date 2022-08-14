@@ -5,7 +5,7 @@ import DronTable from './DronTable';
 import Task from './TaskTable';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-function DronsOnTaskAdd({show, onHide, drons, tasks}) {
+function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     const dispatch = useDispatch();
 
     //const baseURL = "http://127.0.0.1:5000/Drons_on_Tasks/select/user";
@@ -57,7 +57,7 @@ function DronsOnTaskAdd({show, onHide, drons, tasks}) {
     const addDron=()=>{
         
         axios.post("http://127.0.0.1:5000/Drons_on_Tasks/add/common", 
-            {"drons": selectedDron, "tasks": selectedTask, "baseid":1}, {headers:{"Content-Type": "application/json"}} 
+            {"drons": selectedDron, "tasks": selectedTask, "baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
             ).
             then((response) => {
             
@@ -73,7 +73,7 @@ function DronsOnTaskAdd({show, onHide, drons, tasks}) {
 
     const autoAddDron=()=>{
         axios.post("http://127.0.0.1:5000/Drons_on_Tasks/add/auto", 
-            {"baseid":1}, {headers:{"Content-Type": "application/json"}} 
+            {"baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
             ).
             then((response) => {
             

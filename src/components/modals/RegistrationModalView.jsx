@@ -1,13 +1,10 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
-import userStore from '../../store/UserStore'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
-function RegistrationModalView({show, onHide}) {
+function RegistrationModalView({show, onHide, change}) {
     const dispatch = useDispatch()
-    const [CheckIsUserGenderFilter, setCheckIsUserGenderValue] = React.useState(false);
-    const [CheckIsAdminGenderFilter, setCheckIsAdminGenderValue] = React.useState(false);
-  
     const [userName, setUserName] = React.useState()
     const [userEmail, setUserEmail] = React.useState()
     const [userPass, setUserPass] = React.useState()
@@ -17,27 +14,41 @@ function RegistrationModalView({show, onHide}) {
       selectedDron: state.users.users
     }), shallowEqual)
   
-      const handleClick = () => {
-          userStore.setIsAuth(true)
-          if(CheckIsUserGenderFilter){
-            userStore.setIsUser(true)
-            if(CheckIsAdminGenderFilter){
-                userStore.setIsAdmin(true)
-            }
-          }
-  
-          dispatch({
-            type:'PUT_USERS',
-            payload: user
+      const Registrate = () => {
+        axios.post("http://127.0.0.1:5000/Client/register", 
+          {"username": userName, "email": userEmail, "telephon": userTel, "password": userPass}, {headers:{"Content-Type": "application/json"}} 
+          ).
+          then((response) => {
+            console.log(response.data)
+            sessionStorage.setItem("user", JSON.stringify(response.data.data))
+            sessionStorage.setItem("isAuth", (true))
+            sessionStorage.setItem("isUser", (false))
+            sessionStorage.setItem("isAdmin", (false))
+            dispatch({
+              type:'POST_USER',
+              payload: response.data.data,
+              isAuth: true,
+              isUser: false,
+              isAdmin: false
+            })
           })
+          .catch((error) => {
+          console.log(error)
+          }
+        );
   
           onHide()
       }
   
-      
+
+      const openAdminRegistr=()=>{
+        change()
+        onHide()
+      }
   
+
     return (
-      <Modal show={show} onHide={onHide}>
+      <Modal show={show} onHide={onHide} backdrop="static">
           <Modal.Header closeButton onClick={onHide}>
             <Modal.Title>Registration Form</Modal.Title>
           </Modal.Header>
@@ -71,33 +82,18 @@ function RegistrationModalView({show, onHide}) {
                     />
                   </Form.Group>
               </Form>
-              <Form>
-                  
-                  <Form.Check 
-                      type="checkbox"
-                      id={`1`}
-                      label={`Is User`}
-                      value={CheckIsUserGenderFilter}
-                      onChange={(e)=>{setCheckIsUserGenderValue(e.target.checked)}}
-                  />
-                  <Form.Check 
-                      type="checkbox"
-                      id={`2`}
-                      label={`Is Admin`}
-                      value={CheckIsAdminGenderFilter}
-                      onChange={(e)=>{setCheckIsAdminGenderValue(e.target.checked)}}
-                      
-                  />
-  
-                  
-              </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onHide}>
-              change this later
+              Close
             </Button>
-            <Button variant="primary" onClick={handleClick}>
-              Login
+
+            <Button variant="primary" onClick={openAdminRegistr}>
+              Registrate as Owner
+            </Button>
+            
+            <Button variant="primary" onClick={Registrate}>
+              Registrate
             </Button>
           </Modal.Footer>
         </Modal>

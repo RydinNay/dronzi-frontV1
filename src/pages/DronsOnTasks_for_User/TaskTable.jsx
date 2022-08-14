@@ -44,47 +44,51 @@ function Task({task}) {
     }
 
   return (
-<Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
+<>
+    <h3>Tasks</h3>
 
-<thead>
-<tr>
-    <th>id</th>
-    <th>Dist</th>
-    <th>Weight</th>
-    <th>isOccupied</th>
-    <th>TaskDesc</th>
-    <th>Date</th>
-    <th>selected</th>
-</tr>
-</thead>
-<tbody id='table1'>
-{ 
-    task.map(task => 
-        
-            <tr key={task.Taskid}>
-                <td>{task.Taskid}</td>
-                <td>{task.Dist}</td>
-                <td>{task.Weight}</td>
-                <td>{isOccupied(task)}</td>
-                <td>{task.TaskDesc}</td>
-                <td>{task.Date}</td>
-                <td>
-                    
-                    <Form.Check 
-                        label="select"
-                        type="checkbox"
-                        id={task.Taskid}
-                        value={CheckIsDronGenderFilter}
-                        onChange={(e)=>{selectedTasks(e)}}
-                    />
-                    
-                </td>
-            </tr>
-    )
-}
-</tbody>
+    <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Dist</th>
+            <th>Weight</th>
+            <th>isOccupied</th>
+            <th>TaskDesc</th>
+            <th>Date</th>
+            <th>selected</th>
+        </tr>
+        </thead>
+        <tbody id='table1'>
+        { 
+            task.map(task => 
+                
+                    <tr key={task.Taskid}>
+                        <td>{task.Taskid}</td>
+                        <td>{task.Dist}</td>
+                        <td>{task.Weight}</td>
+                        <td>{isOccupied(task)}</td>
+                        <td>{task.TaskDesc}</td>
+                        <td>{task.Date}</td>
+                        <td>
+                            
+                            <Form.Check 
+                                label="select"
+                                type="checkbox"
+                                id={task.Taskid}
+                                value={CheckIsDronGenderFilter}
+                                onChange={(e)=>{selectedTasks(e)}}
+                            />
+                            
+                        </td>
+                    </tr>
+            )
+        }
+        </tbody>
 
-</Table>  )
+    </Table>  
+</>
+)
 }
 
 export default Task

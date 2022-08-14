@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 
-function DronsAdd({show, onHide}) {
+function DronsAdd({show, onHide, user}) {
     const [modle, setModle] = React.useState(null)
     const [energy, setEnergy] = React.useState(null)
     const [lifting, setLifting] = React.useState(null)
@@ -17,7 +17,7 @@ function DronsAdd({show, onHide}) {
         if(!isNaN(energy) && !isNaN(lifting)){
 
         axios.post(baseURL, 
-            {"modle":modle, "ecapacity":energy, "lcapacity":lifting, "baseid":1}, {headers:{"Content-Type": "application/json"}} 
+            {"modle":modle, "ecapacity":energy, "lcapacity":lifting, "baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
             ).
             then((response) => {
             

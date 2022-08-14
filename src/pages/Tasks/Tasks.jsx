@@ -15,8 +15,13 @@ function Tasks() {
     selectedTasks: state.tasks.selectedTask
   }), shallowEqual)
 
+
+  const { user } = useSelector(state => ({
+    user: state.users.user
+  }), shallowEqual)
+
   useEffect(() => {
-    axios.get(baseURL, {params:{"clientid": 1}}).then((response) => {
+    axios.get(baseURL, {params:{"clientid": user.id}}).then((response) => {
         setTasks(response.data)
         //console.log(response.data)
       })
@@ -32,7 +37,7 @@ function Tasks() {
         var boxes = document.getElementById(tasks[i].Taskid);
         boxes.checked = false;  
     }
-    axios.get(baseURL, {params:{"clientid": 1}}).then((response) => {
+    axios.get(baseURL, {params:{"clientid": user.id}}).then((response) => {
         setTasks(response.data);
         dispatch({
           type:'PUT_SELECTED_TAKS',
@@ -91,7 +96,7 @@ function Tasks() {
     {/*
       <TaskChange show={changeFormIsVisible} onHide={() => setChangeFormVisible(false)} allTasks={tasks}/>
   */}
-      <TaskAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)}/>
+      <TaskAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)} user={user}/>
 
 
     </Container>  

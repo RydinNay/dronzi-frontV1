@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 
-function TaskAdd({show, onHide}) {
+function TaskAdd({show, onHide, user}) {
     const [description, setDescription] = React.useState(null)
     const [distants, setDistants] = React.useState(null)
     const [weight, setWeight] = React.useState(null)
@@ -16,7 +16,7 @@ function TaskAdd({show, onHide}) {
         if(!isNaN(weight) && !isNaN(distants)){
 
         axios.post(baseURL, 
-            {"desc":description, "dist":distants, "weight":weight, "clientid":1}, {headers:{"Content-Type": "application/json"}} 
+            {"desc":description, "dist":distants, "weight":weight, "clientid":user.id}, {headers:{"Content-Type": "application/json"}} 
             ).
             then((response) => {
             

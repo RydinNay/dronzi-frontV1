@@ -13,7 +13,8 @@ function UserElements() {
         </Dropdown.Toggle>
         <Dropdown.Menu>
             <Dropdown.Item onClick={()=>navigate('/drons')}>Inspect Drons</Dropdown.Item>
-            <Dropdown.Item onClick={()=>navigate('/drons_on_tasks')}>Inspect Drons On Tasks</Dropdown.Item>
+            <Dropdown.Item onClick={()=>navigate('/drons_on_tasks(user)')}>Inspect Drons On Tasks</Dropdown.Item>
+            <Dropdown.Item onClick={()=>navigate('/statistic')}>Dron On Task Statistic</Dropdown.Item>
         </Dropdown.Menu>
     </Dropdown>  )
 }

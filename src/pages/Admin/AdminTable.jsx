@@ -3,36 +3,33 @@ import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function AdminTable({droneBase, users}) {
-
-    console.log(droneBase)
-    console.log(users)
-
+    
     const [CheckIsDronGenderFilter, setCheckIsDronGenderValue] = React.useState(false);
 
-    const { selectedDronsOnTasks } = useSelector(state => ({
-        selectedDronsOnTasks: state.drons_on_tasks.selectedDronsOnTasks
+    const { selectedUsers } = useSelector(state => ({
+        selectedUsers: state.users.selectedUser
     }), shallowEqual)
 
     const dispatch = useDispatch();
 
-        const selectedDrons = (e)=>{
+        const selectUser = (e)=>{
 
             if(e.target.checked){
-                selectedDronsOnTasks.push(parseInt(e.target.id))
+                selectedUsers.push(parseInt(e.target.id))
             }
             else{
                 
-                let i = selectedDronsOnTasks.length - 1
-                while(parseInt(e.target.id) !== selectedDronsOnTasks[i]){
+                let i = selectedUsers.length - 1
+                while(parseInt(e.target.id) !== selectedUsers[i]){
                     i = i-1
                 }
-                selectedDronsOnTasks.splice(i, 1) 
+                selectedUsers.splice(i, 1) 
                 
             }
 
             dispatch({
-                type:'PUT_SELECTED_DRONS_ON_TASKS',
-                payload: selectedDronsOnTasks
+                type:'SELECT_USER',
+                payload: selectedUsers
             })
         
         }
@@ -70,7 +67,7 @@ function AdminTable({droneBase, users}) {
                                 type="checkbox"
                                 id={user.Userid}
                                 value={CheckIsDronGenderFilter}
-                                onChange={(e)=>{selectedDrons(e)}}
+                                onChange={(e)=>{selectUser(e)}}
                             />
                             
                         </td>

@@ -1,24 +1,39 @@
 import React, { useState } from 'react'
 import {Navbar, Nav, Button, Container, Dropdown} from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
-import userStore from '../../store/UserStore';
 import {useNavigate} from 'react-router-dom'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import navLinkNavigation from '../functions/HandleClickNavigator'
 import LoginModalView from '../modals/LoginModalView'
+import AdminRegModalForm from '../modals/AdminRegModalForm';
 import RegistrationModalView from '../modals/RegistrationModalView'
 import AdminElements from './AdminElements';
 import UserElements from './UserElements';
 import ClientElements from './ClientElements';
 
+
+
 function Header () {
     const navigate = navLinkNavigation(useNavigate())
-    
+    const dispatch = useDispatch()
     //console.log(userStore)
-
+    const [adminRegistrationVisible, setAdminRegistrationVisible] = useState(false)
     const [loginVisible, setLoginVisible] = useState(false)
     const [registrationVisible, setRegistrationVisible] = useState(false)
-
-
+    /*
+    const isAuth = useState(JSON.parse(sessionStorage.getItem("isAuth")))
+    const isUser = useState(JSON.parse(sessionStorage.getItem("isUser")))
+    const isAdmin = useState(JSON.parse(sessionStorage.getItem("isAdmin")))
+    */
+    const { isAuth } = useSelector(state => ({
+        isAuth: state.users.isAuth
+    }), shallowEqual)
+    const { isUser } = useSelector(state => ({
+        isUser: state.users.isUser
+      }), shallowEqual)
+    const { isAdmin } = useSelector(state => ({
+        isAdmin: state.users.isAdmin
+    }), shallowEqual)
 
     const getElement = () => {
         /*const elements :{
@@ -26,16 +41,23 @@ function Header () {
 
         }
         */
-        if(userStore.isAuth && userStore.isUser && userStore.isAdmin){
+        if(isAuth === true && isUser === true && isAdmin=== true){
             return <AdminElements/>
         }
         else 
-        if(userStore.isAuth && userStore.isUser){
+        if(isAuth === true && isUser=== true){
             return <UserElements/>
         }else
-        if(userStore.isAuth){
+        if(isAuth === true){
             return <ClientElements/>
         }
+    }
+
+    const LogOut =() =>{
+        sessionStorage.clear()
+        dispatch({
+            type:'LOGOUT'
+          })
     }
 
     return (
@@ -51,10 +73,10 @@ function Header () {
                         </Nav>
 
                         <Nav className="ms-auto">
-                        {userStore.isAuth?
+                        {isAuth===true?
                             (
                                 <>
-                                    <Button variant={"outline-light"} onClick={() => (userStore.setIsAuth(false), userStore.setIsUser(false, userStore.setIsAdmin(false)))}>Out</Button>
+                                    <Button variant={"outline-light"} onClick={() => (LogOut())}>Out</Button>
                                 </>
                             )
                             :
@@ -63,8 +85,8 @@ function Header () {
                                 <Button variant={"outline-light"} onClick={()=> setRegistrationVisible(true)} className="ms-1">Registration</Button>
                                 
                                 <LoginModalView show={loginVisible} onHide={() => setLoginVisible(false)}/>
-                                <RegistrationModalView show={registrationVisible} onHide={() => setRegistrationVisible(false)}/>
-
+                                <RegistrationModalView show={registrationVisible} onHide={() => setRegistrationVisible(false)} change={() =>setAdminRegistrationVisible(true)}/>
+                                <AdminRegModalForm show={adminRegistrationVisible} onHide={() => setAdminRegistrationVisible(false)} change={() =>setRegistrationVisible(true)}/>
                                 </>
                             )
                             

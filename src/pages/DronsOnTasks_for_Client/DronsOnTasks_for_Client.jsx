@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Container, Button, Card } from 'react-bootstrap'
 import DronsOnTasksTable_for_Client from './DronsOnTaskTable_for_Client';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 
 function DronsOnTasks_for_Client() {
@@ -13,6 +13,11 @@ function DronsOnTasks_for_Client() {
   
     //console.log(selectedDron)
   
+    const { user } = useSelector(state => ({
+      user: state.users.user
+    }), shallowEqual)
+  
+
     const dispatch = useDispatch();
   
     const [dronOnTask, setDronOnTask] = React.useState(null);
@@ -22,7 +27,7 @@ function DronsOnTasks_for_Client() {
     const [drons, setDrons] = React.useState(null);
 
     useEffect(() => {
-      axios.get(baseURL, {params:{"clientid": 1}}).then((response) => {
+      axios.get(baseURL, {params:{"clientid": user.Userid}}).then((response) => {
           setDronOnTask(response.data)
       })
       

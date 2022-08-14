@@ -12,12 +12,16 @@ function Drons() {
   const dispatch = useDispatch();
   const [drons, setDrons] = React.useState(null);
 
+  const { user } = useSelector(state => ({
+    user: state.users.user
+  }), shallowEqual)
+
   const { selectedDrons } = useSelector(state => ({
     selectedDrons: state.drons.selectedDron
   }), shallowEqual)
 
   useEffect(() => {
-    axios.get(baseURL, {params:{"baseid": 1}}).then((response) => {
+    axios.get(baseURL, {params:{"baseid": user.dron_baseid}}).then((response) => {
         setDrons(response.data)
         //console.log(response.data)
       })
@@ -33,7 +37,7 @@ function Drons() {
         var boxes = document.getElementById(drons[i].Dronid);
         boxes.checked = false;  
     }
-    axios.get(baseURL, {params:{"baseid": 1}}).then((response) => {
+    axios.get(baseURL, {params:{"baseid": user.dron_baseid}}).then((response) => {
         setDrons(response.data);
         dispatch({
           type:'PUT_SELECTED_DRONS',
@@ -90,7 +94,7 @@ function Drons() {
 
       <DronsChange show={changeFormIsVisible} onHide={() => setChangeFormVisible(false)} allDrons={drons}/>
 
-      <DronsAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)}/>
+      <DronsAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)} user={user}/>
 
 
     </Container>  

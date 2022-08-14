@@ -42,6 +42,9 @@ function DronTable({dron}) {
 
     }
   return (
+<>
+    <h3>Drons</h3>
+
     <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
 
         <thead>
@@ -80,7 +83,8 @@ function DronTable({dron}) {
         }
         </tbody>
 
-    </Table>  )
+    </Table>  
+    </>)
 }
 
 export default DronTable

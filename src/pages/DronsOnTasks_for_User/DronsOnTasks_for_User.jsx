@@ -10,9 +10,11 @@ function DronsOnTasks_for_User() {
 
   const { selectedDron } = useSelector(state => ({
     selectedDron: state.drons_on_tasks.selectedDronsOnTasks
-}), shallowEqual)
+  }), shallowEqual)
 
-  console.log(selectedDron)
+  const { user } = useSelector(state => ({
+    user: state.users.user
+  }), shallowEqual)
 
   const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ function DronsOnTasks_for_User() {
   const [drons, setDrons] = React.useState(null);
 
   useEffect(() => {
-    axios.get(baseURL, {params:{"baseid": 1}}).then((response) => {
+    axios.get(baseURL, {params:{"baseid": user.dron_baseid}}).then((response) => {
         setDronOnTask(response.data)
     })
 
@@ -42,7 +44,7 @@ function DronsOnTasks_for_User() {
 
   useEffect(() => {
    
-    axios.get("http://127.0.0.1:5000/Dron", {params:{"baseid":1}}).then((response) => {
+    axios.get("http://127.0.0.1:5000/Dron", {params:{"baseid":user.dron_baseid}}).then((response) => {
       setDrons(response.data)
     })
   }, [])
@@ -54,7 +56,7 @@ function DronsOnTasks_for_User() {
           var boxes = document.getElementById(dronOnTask[i].DronTaskid);
           boxes.checked = false;  
       }
-      axios.get(baseURL, {params:{"baseid": 1}}).then((response) => {
+      axios.get(baseURL, {params:{"baseid": user.dron_baseid}}).then((response) => {
           setDronOnTask(response.data);
       })
 
@@ -62,7 +64,7 @@ function DronsOnTasks_for_User() {
         setTasks(response.data)
       })
 
-      axios.get("http://127.0.0.1:5000/Dron", {params:{"baseid":1}}).then((response) => {
+      axios.get("http://127.0.0.1:5000/Dron", {params:{"baseid":user.dron_baseid}}).then((response) => {
         setDrons(response.data)
       })
     
@@ -122,7 +124,7 @@ function DronsOnTasks_for_User() {
         
       </Card>
 
-      <DronsOnTaskAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)} drons={drons} tasks={tasks}/>
+      <DronsOnTaskAdd show={addFormIsVisible} onHide={() => setAddFormVisible(false)} drons={drons} tasks={tasks} user={user}/>
 
     </Container>  
     )
