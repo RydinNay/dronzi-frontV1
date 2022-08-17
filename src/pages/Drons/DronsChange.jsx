@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react'
-import { Button, Form, Modal, Table, Card, Container, FormControl } from 'react-bootstrap'
+import React from 'react'
+import { Button, Modal, Table, Card, Container, FormControl } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 function DronsChange({show, onHide, allDrons}) {
@@ -60,6 +61,8 @@ function DronsChange({show, onHide, allDrons}) {
     console.log(selectedDrons)
     console.log(allDrons)
 
+    const { t, i18n } = useTranslation()
+
     return (
     <Modal  onHide={Close}
     size="xl"
@@ -68,7 +71,7 @@ function DronsChange({show, onHide, allDrons}) {
     aria-labelledby="example-modal-sizes-title-xl"
     >
         <Modal.Header closeButton onClick={Close}>
-            <Modal.Title>Drons Change Form</Modal.Title>
+            <Modal.Title>{t("DronsChangeForm")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Card className="">
@@ -77,9 +80,9 @@ function DronsChange({show, onHide, allDrons}) {
                         <thead>
                             <tr>
                                 <th>id</th>
-                                <th>Energy Capacity</th>
-                                <th>Lifting Capacity</th>
-                                <th>Dron Modle</th>
+                                <th>{t("EnergyCapacity")}</th>
+                                <th>{t("LiftingCapacity")}</th>
+                                <th>{t("DronModle")}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,13 +103,13 @@ function DronsChange({show, onHide, allDrons}) {
                     </Table>
                 </Container>
                 <Button variant="secondary" onClick={handleClick} className="m-2 p-2">
-                    Refresh Table
+                    {t("RefreshTable")}
                 </Button>
             </Card>
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={AplyChanges}>
-                Apllay changes
+                {t("ApllayChanges")}
             </Button>
         </Modal.Footer>
     </Modal>

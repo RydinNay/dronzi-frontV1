@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Form, Modal, Tabs, Tab, Container, Card } from 'react-bootstrap'
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function AdminRegModalForm({show, onHide, change}) {
@@ -43,49 +44,50 @@ function AdminRegModalForm({show, onHide, change}) {
         change()
         onHide()
       }
-  
+      const { t, i18n } = useTranslation()
+
     return (
       <Modal show={show} onHide={onHide} backdrop="static">
           <Modal.Header closeButton onClick={onHide}>
-            <Modal.Title>Registration Form</Modal.Title>
+            <Modal.Title>{t("Rform")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Card>
                   <Form>
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                      <Form.Label>Enter your Name</Form.Label>
+                      <Form.Label>{t("EnterNameRform")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="name@example.com"
                           onChange={e => setUserName(e.target.value)}
                       />
                       
-                      <Form.Label>Enter your Email Adress</Form.Label>
+                      <Form.Label>{t("EnterEmailRform")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="****@gmail.com"
                           onChange={e => setUserEmail(e.target.value)}
                       />
-                      <Form.Label>Enter your Password111111</Form.Label>
+                      <Form.Label>{t("EnterPassRform")}</Form.Label>
                       <Form.Control
                           type="password"
                           placeholder="pass"
                           onChange={e => setUserPass(e.target.value)}
                       />
-                      <Form.Label>Enter your Telephone1111111</Form.Label>
+                      <Form.Label>{t("EnterTelRform")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="+380*****"
                           onChange={e => setUserTel(e.target.value)}
                       />
-                      <Form.Label>Company Name</Form.Label>
+                      <Form.Label>{t("EnterComNameRform")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="Company Name"
                           onChange={e => setCompanyName(e.target.value)}
                       />
-                      <Form.Label>Company Pass</Form.Label>
+                      <Form.Label>{t("EnterComPassEform")}</Form.Label>
                       <Form.Control
                           type="password"
                           placeholder="*****"
@@ -97,15 +99,15 @@ function AdminRegModalForm({show, onHide, change}) {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onHide}>
-              Close
+              {t("CloseRform")}
             </Button>
 
             <Button variant="primary" onClick={openRegistr}>
-              Registrate as Client
+              {t("RegistrateAsClient")}
             </Button>
             
             <Button variant="primary" onClick={Registrate}>
-              Registrate
+              {t("Registrate")}
             </Button>
           </Modal.Footer>
         </Modal>

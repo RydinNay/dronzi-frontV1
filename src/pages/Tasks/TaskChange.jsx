@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react'
-import { Button, Form, Modal, Table, Card, Container, FormControl } from 'react-bootstrap'
+import React from 'react'
+import { useTranslation } from 'react-i18next';
+import { Button, Modal, Table, Card, Container, FormControl } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -9,6 +10,8 @@ function TaskChange({show, onHide, allTasks}) {
     const { selectedTasks } = useSelector(state => ({
         selectedTasks: state.tasks.selectedTask
     }), shallowEqual)
+
+    const { t, i18n } = useTranslation()
 
     const Close=(() => {
         

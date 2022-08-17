@@ -1,10 +1,13 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { Form, Table } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function DronTable({dron}) {
     const [CheckIsDronGenderFilter, setCheckIsDronGenderValue] = React.useState(false);
     
+    const { t, i18n } = useTranslation()
+
     const dispatch = useDispatch();
 
     const { selectedDron } = useSelector(state => ({
@@ -43,18 +46,18 @@ function DronTable({dron}) {
     }
   return (
 <>
-    <h3>Drons</h3>
+    <h3>{t("Drons")}</h3>
 
     <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
 
         <thead>
         <tr>
             <th>id</th>
-            <th>Modle</th>
-            <th>EnergyCapacity</th>
-            <th>IsOccupied</th>
-            <th>LiftingCapacity</th>
-            <th>selected</th>
+            <th>{t("DronModle")}</th>
+            <th>{t("EnergyCapacity")}</th>
+            <th>{t("IsOccupied")}</th>
+            <th>{t("LiftingCapacity")}</th>
+            <th>{t("Selected")}</th>
         </tr>
         </thead>
         <tbody id='table1'>
@@ -70,7 +73,7 @@ function DronTable({dron}) {
                         <td>
                             
                             <Form.Check 
-                                label="select"
+                                label={t("Selected")}
                                 type="checkbox"
                                 id={dron.Dronid}
                                 value={CheckIsDronGenderFilter}

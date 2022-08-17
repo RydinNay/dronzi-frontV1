@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Container, Button, Card } from 'react-bootstrap'
 import AdminAdd from './AdminAdd'
 import AdminTable from './AdminTable';
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 
@@ -12,6 +13,7 @@ function Admin() {
     user: state.users.user
   }), shallowEqual)
   
+  const { t, i18n } = useTranslation()
 
   //console.log(selectedDron)
 
@@ -98,16 +100,16 @@ function Admin() {
         <Container className="ms-auto">
 
           <Button variant="secondary" onClick={() => (setAddFormVisible(true))} className="ms-auto me-2">
-              Add dron base on task
+              {t("AddDbOnTask")}
           </Button>
 
           <Button variant="secondary" onClick={() => (deleteUser())} className="ms-auto me-2">
-              Delete selected dron base on task
+              {t("DeleteSelectedDbOnTask")}
           </Button>
         </Container>
 
         <Button variant="secondary" onClick={() => (refreshTable())} className="m-3">
-            Refresh Table
+          {t("RefreshTable")}
         </Button>
         
       </Card>

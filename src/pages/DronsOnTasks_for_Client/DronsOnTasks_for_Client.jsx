@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next';
 import { Container, Button, Card } from 'react-bootstrap'
 import DronsOnTasksTable_for_Client from './DronsOnTaskTable_for_Client';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -17,6 +18,7 @@ function DronsOnTasks_for_Client() {
       user: state.users.user
     }), shallowEqual)
   
+    const { t, i18n } = useTranslation()
 
     const dispatch = useDispatch();
   
@@ -94,7 +96,7 @@ function DronsOnTasks_for_Client() {
           </Container>
   
           <Button variant="secondary" onClick={() => (refreshTable())} className="m-3">
-              Refresh Table
+              {t("RefreshTable")}
           </Button>
           
         </Card>

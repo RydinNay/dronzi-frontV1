@@ -1,9 +1,12 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { Form, Table } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function Task({task}) {
     const [CheckIsDronGenderFilter, setCheckIsDronGenderValue] = React.useState(false);
+
+    const { t, i18n } = useTranslation()
 
     const dispatch = useDispatch();
 
@@ -17,9 +20,9 @@ function Task({task}) {
 
     const isOccupied = (task)=>{
         if(task.IsOccupied)
-            return 'yes'
-        else return 'no'
-    }
+        return t("OccupiedT")
+        else return t("OccupiedF")
+}
 
     const selectedTasks = (e)=>{
 
@@ -45,18 +48,18 @@ function Task({task}) {
 
   return (
 <>
-    <h3>Tasks</h3>
+    <h3>{t("Tasks")}</h3>
 
     <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
         <thead>
         <tr>
             <th>id</th>
-            <th>Dist</th>
-            <th>Weight</th>
-            <th>isOccupied</th>
-            <th>TaskDesc</th>
-            <th>Date</th>
-            <th>selected</th>
+            <th>{t("Dist")}</th>
+            <th>{t("Weight")}</th>
+            <th>{t("IsOccupied")}</th>
+            <th>{t("TaskDesc")}</th>
+            <th>{t("Date")}</th>
+            <th>{t("Selected")}</th>
         </tr>
         </thead>
         <tbody id='table1'>
@@ -73,7 +76,7 @@ function Task({task}) {
                         <td>
                             
                             <Form.Check 
-                                label="select"
+                                label={t("Selected")}
                                 type="checkbox"
                                 id={task.Taskid}
                                 value={CheckIsDronGenderFilter}

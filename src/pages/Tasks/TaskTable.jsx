@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -9,13 +10,15 @@ function TasksTable(tasks) {
         selectedTask: state.tasks.selectedTask
     }), shallowEqual)
 
+    const { t, i18n } = useTranslation()
+
     const dispatch = useDispatch();
 
 
         const isOccupied = (task)=>{
             if(task.IsOccupied)
-                return 'yes'
-            else return 'no'
+            return t("OccupiedT")
+            else return t("OccupiedF")
         }
 
         const selectedTasks = (e)=>{
@@ -46,12 +49,12 @@ function TasksTable(tasks) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Description</th>
-                <th>Distation</th>
-                <th>IsOccupied</th>
-                <th>Weight</th>
-                <th>Date</th>
-                <th>selected</th>
+                <th>{t("TaskDesc")}</th>
+                <th>{t("Dist")}</th>
+                <th>{t("IsOccupied")}</th>
+                <th>{t("Weight")}</th>
+                <th>{t("Date")}</th>
+                <th>{t("Selected")}</th>
             </tr>
         </thead>
         <tbody id='table1'>
@@ -68,7 +71,7 @@ function TasksTable(tasks) {
                         <td>
                             
                             <Form.Check 
-                                label="select"
+                                label={t("Selected")}
                                 type="checkbox"
                                 id={task.Taskid}
                                 value={CheckIsDronGenderFilter}

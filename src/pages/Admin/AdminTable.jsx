@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -9,6 +10,8 @@ function AdminTable({droneBase, users}) {
     const { selectedUsers } = useSelector(state => ({
         selectedUsers: state.users.selectedUser
     }), shallowEqual)
+
+    const { t, i18n } = useTranslation()
 
     const dispatch = useDispatch();
 
@@ -41,12 +44,12 @@ function AdminTable({droneBase, users}) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>UserName</th>
-                <th>UserTel</th>
-                <th>UserEmail</th>
-                <th>UserDronBaseid</th>
-                <th>DronBaseName</th>
-                <th>Selected</th>
+                <th>{t("UserName")}</th>
+                <th>{t("UserTel")}</th>
+                <th>{t("UserEmail")}</th>
+                <th>{t("UserDronBaseid")}</th>
+                <th>{t("DronBaseName")}</th>
+                <th>{t("Selected")}</th>
             </tr>
         </thead>
         <tbody id='table1'>
@@ -63,7 +66,7 @@ function AdminTable({droneBase, users}) {
                         <td>
                             
                             <Form.Check 
-                                label="select"
+                                label={t("Selected")}
                                 type="checkbox"
                                 id={user.Userid}
                                 value={CheckIsDronGenderFilter}

@@ -1,9 +1,12 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function DronsOnTasksTable_for_User({dronOnTask, tasks, drons}) {
     const [CheckIsDronGenderFilter, setCheckIsDronGenderValue] = React.useState(false);
+
+    const { t, i18n } = useTranslation()
 
     const { selectedDronsOnTasks } = useSelector(state => ({
         selectedDronsOnTasks: state.drons_on_tasks.selectedDronsOnTasks
@@ -40,15 +43,15 @@ function DronsOnTasksTable_for_User({dronOnTask, tasks, drons}) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>DronId</th>
-                <th>EnergyCapacity</th>
-                <th>LitfingCapacity</th>
-                <th>TaskId</th>
-                <th>TaskDist</th>
-                <th>TaskWeight</th>
-                <th>TaskDesc</th>
-                <th>Date</th>
-                <th>selected</th>
+                <th>{t("DronId")}</th>
+                <th>{t("EnergyCapacity")}</th>
+                <th>{t("LiftingCapacity")}</th>
+                <th>{t("TaskId")}</th>
+                <th>{t("Dist")}</th>
+                <th>{t("Weight")}</th>
+                <th>{t("TaskDesc")}</th>
+                <th>{t("Date")}</th>
+                <th>{t("Selected")}</th>
             </tr>
         </thead>
         <tbody id='table1'>
@@ -69,7 +72,7 @@ function DronsOnTasksTable_for_User({dronOnTask, tasks, drons}) {
                         <td>
                             
                             <Form.Check 
-                                label="select"
+                                label={t("Selected")}
                                 type="checkbox"
                                 id={drontask.DronTaskid}
                                 value={CheckIsDronGenderFilter}

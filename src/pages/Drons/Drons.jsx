@@ -4,6 +4,7 @@ import DronsChange from './DronsChange'
 import DronsAdd from './DronsAdd'
 import DronsTable from './DronsTable'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 
@@ -11,6 +12,7 @@ function Drons() {
   const baseURL = "http://127.0.0.1:5000/Dron"
   const dispatch = useDispatch();
   const [drons, setDrons] = React.useState(null);
+  const { t, i18n } = useTranslation()
 
   const { user } = useSelector(state => ({
     user: state.users.user
@@ -63,6 +65,8 @@ function Drons() {
   }
   if (!drons) return null;
 
+
+
   return (
     <Container>
       <Card className="">
@@ -74,20 +78,20 @@ function Drons() {
 
         <Container className="ms-auto">
           <Button variant="secondary" onClick={() => (setChangeFormVisible(true))} className="ms-auto me-2">
-              Edit selected dron
+              {t("EditSelectedDron")}
           </Button>
 
           <Button variant="secondary" onClick={() => (setAddFormVisible(true))} className="ms-auto me-2">
-              Add dron
+              {t("AddDron")}
           </Button>
 
           <Button variant="secondary" onClick={() => (deleteDron())} className="ms-auto me-2">
-              Delete selected drons
+              {t("DeleteSelectedDrons")}
           </Button>
         </Container>
 
         <Button variant="secondary" onClick={() => (refreshTable())} className="m-3">
-            Refresh Table
+            {t("RefreshTable")}
         </Button>
         
       </Card>

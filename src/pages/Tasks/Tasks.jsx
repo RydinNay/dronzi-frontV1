@@ -4,12 +4,15 @@ import TaskChange from './TaskChange'
 import TaskAdd from './TaskAdd'
 import TasksTable from './TaskTable'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function Tasks() {
   const baseURL = "http://127.0.0.1:5000/Tasks/select"
   const dispatch = useDispatch();
   const [tasks, setTasks] = React.useState(null);
+
+  const { t, i18n } = useTranslation()
 
   const { selectedTasks } = useSelector(state => ({
     selectedTasks: state.tasks.selectedTask
@@ -80,16 +83,16 @@ function Tasks() {
           </Button>
           */}
           <Button variant="secondary" onClick={() => (setAddFormVisible(true))} className="ms-auto me-2">
-              Add dron
+              {t("AddTasks")}
           </Button>
 
           <Button variant="secondary" onClick={() => (deleteTask())} className="ms-auto me-2">
-              Delete selected drons
+              {t("DeleteSelectedTasks")}
           </Button>
         </Container>
 
         <Button variant="secondary" onClick={() => (refreshTable())} className="m-3">
-            Refresh Table
+          {t("RefreshTable")}
         </Button>
         
       </Card>

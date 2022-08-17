@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 
 function DronsAdd({show, onHide, user}) {
@@ -33,6 +34,8 @@ function DronsAdd({show, onHide, user}) {
         
     }
 
+    const { t, i18n } = useTranslation()
+
   return (
     <Modal  onHide={onHide}
     size="lg"
@@ -41,24 +44,24 @@ function DronsAdd({show, onHide, user}) {
     aria-labelledby="example-modal-sizes-title-lg"
     >
         <Modal.Header closeButton onClick={onHide}>
-            <Modal.Title>Drons Add Form</Modal.Title>
+            <Modal.Title>{t("DronsAddForm")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Card className="">
                 <Container className="m-1 me-auto ms-auto">
                 <Form>
                     <Form.Group className="mb-3" controlId="formDronModle">
-                        <Form.Label>Dron Modle</Form.Label>
+                        <Form.Label>{t("DronModle")}</Form.Label>
                         <Form.Control type="text" placeholder="Dron modle" onChange={e => setModle(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formEnergyCap">
-                        <Form.Label>EnergyCapacity</Form.Label>
+                        <Form.Label>{t("EnergyCapacity")}</Form.Label>
                         <Form.Control type="text" placeholder="How long can dron fly" onChange={e => setEnergy(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formLiftingCap">
-                        <Form.Label>LiftingCapacity</Form.Label>
+                        <Form.Label>{t("LiftingCapacity")}</Form.Label>
                         <Form.Control type="text" placeholder="How mach can lift this dron" onChange={e => setLifting(e.target.value)}/>
                     </Form.Group>
                     </Form>
@@ -68,7 +71,7 @@ function DronsAdd({show, onHide, user}) {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={() => addDron()}>
-                Add dron
+                {t("AddDron")}
             </Button>
             
         </Modal.Footer>

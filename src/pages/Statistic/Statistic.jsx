@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next';
 import { Container, Button, Card } from 'react-bootstrap'
 import StatisticTable from './StatisticTable';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -10,6 +11,8 @@ function Statistic() {
         user: state.users.user
       }), shallowEqual)
   
+    const { t, i18n } = useTranslation()
+
     const [statisticDronOnTask, setStatisticDronOnTask] = React.useState(null);
 
     useEffect(() => {
@@ -53,7 +56,7 @@ function Statistic() {
           </Container>
   
           <Button variant="secondary" onClick={() => (refreshTable())} className="m-3">
-              Refresh Table
+            {t("RefreshTable")}
           </Button>
           
         </Card>

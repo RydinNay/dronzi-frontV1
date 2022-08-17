@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
 import { Container, Button, Card } from 'react-bootstrap'
 import DronsOnTaskAdd from './DronsOnTaskAdd'
+import { useTranslation } from 'react-i18next';
 import DronsOnTasksTable_for_User from './DronsOnTaskTable_for_User';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios'
 
 function DronsOnTasks_for_User() {
   const baseURL = "http://127.0.0.1:5000/Drons_on_Tasks/select/user"
+
+  const { t, i18n } = useTranslation()
 
   const { selectedDron } = useSelector(state => ({
     selectedDron: state.drons_on_tasks.selectedDronsOnTasks
@@ -110,16 +113,16 @@ function DronsOnTasks_for_User() {
         <Container className="ms-auto">
 
           <Button variant="secondary" onClick={() => (setAddFormVisible(true))} className="ms-auto me-2">
-              Add dron on task
+              {t("AddDronOnTask")}
           </Button>
 
           <Button variant="secondary" onClick={() => (deleteDron())} className="ms-auto me-2">
-              Delete selected dron on task
+              {t("DeleteSelectedDronOnTask")}
           </Button>
         </Container>
 
         <Button variant="secondary" onClick={() => (refreshTable())} className="m-3">
-            Refresh Table
+            {t("RefreshTable")}
         </Button>
         
       </Card>

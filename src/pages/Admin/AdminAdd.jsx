@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -8,6 +9,9 @@ function AdminAdd({show, onHide, user}) {
     const [userEmail, setUserEmail] = React.useState()
     const [userPass, setUserPass] = React.useState()
     const [userTel, setUserTel] = React.useState()
+
+    const { t, i18n } = useTranslation()
+
     const addDron=()=>{
         axios.post("http://127.0.0.1:5000/Users/register", {"username": userName, "email": userEmail, "telephon": userTel, "password": userPass, 
         "roleid": 2, "baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
@@ -27,7 +31,7 @@ function AdminAdd({show, onHide, user}) {
     aria-labelledby="example-modal-sizes-title-lg"
     >
         <Modal.Header closeButton onClick={onHide}>
-            <Modal.Title>Drons Add Form</Modal.Title>
+            <Modal.Title>{t("UserAddForm")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Card className="">
@@ -35,26 +39,26 @@ function AdminAdd({show, onHide, user}) {
                   <Form>
 
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                      <Form.Label>Enter user name</Form.Label>
+                      <Form.Label>{t("StatisticEnterUserName")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="name@example.com"
                           onChange={e => setUserName(e.target.value)}
                       />
                       
-                      <Form.Label>Enter user email adress</Form.Label>
+                      <Form.Label>{t("StatisticEnterUserEmailAdress")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="****@gmail.com"
                           onChange={e => setUserEmail(e.target.value)}
                       />
-                      <Form.Label>Enter user password</Form.Label>
+                      <Form.Label>{t("StatisticEnterUserPass")}</Form.Label>
                       <Form.Control
                           type="password"
                           placeholder="pass"
                           onChange={e => setUserPass(e.target.value)}
                       />
-                      <Form.Label>Enter user telephone</Form.Label>
+                      <Form.Label>{t("StatisticEnterUserTel")}</Form.Label>
                       <Form.Control
                           type="text"
                           placeholder="+380*****"
@@ -68,7 +72,7 @@ function AdminAdd({show, onHide, user}) {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={() => addDron()}>
-                Add dron
+                {t("AddUser")}
             </Button>
             
         </Modal.Footer>

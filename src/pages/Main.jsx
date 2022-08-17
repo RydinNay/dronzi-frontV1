@@ -2,8 +2,11 @@ import React from 'react'
 import { Container, Carousel } from 'react-bootstrap'
 import firstImg from '../Images/gruzovyie-dronyi.jpg'
 import secondImg from '../Images/images.jpg'
+import { useTranslation } from 'react-i18next';
 
 function Main() {
+  const { t, i18n } = useTranslation()
+
   return (
     <Container className="">
       <Carousel>

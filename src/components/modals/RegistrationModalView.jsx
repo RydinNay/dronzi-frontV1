@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -46,35 +47,36 @@ function RegistrationModalView({show, onHide, change}) {
         onHide()
       }
   
+    const { t, i18n } = useTranslation()
 
     return (
       <Modal show={show} onHide={onHide} backdrop="static">
           <Modal.Header closeButton onClick={onHide}>
-            <Modal.Title>Registration Form</Modal.Title>
+            <Modal.Title>{t("Rform")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
               <Form>
                   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Enter your Name</Form.Label>
+                    <Form.Label>{t("EnterNameRform")}</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="name@example.com"
                         onChange={e => setUserName(e.target.value)}
                     />
                     
-                    <Form.Label>Enter your Email Adress</Form.Label>
+                    <Form.Label>{t("EnterEmailRform")}</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="****@gmail.com"
                         onChange={e => setUserEmail(e.target.value)}
                     />
-                    <Form.Label>Enter your Password</Form.Label>
+                    <Form.Label>{t("EnterPassRform")}</Form.Label>
                     <Form.Control
                         type="password"
                         placeholder="pass"
                         onChange={e => setUserPass(e.target.value)}
                     />
-                    <Form.Label>Enter your Telephone</Form.Label>
+                    <Form.Label>{t("EnterTelRform")}</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="+380*****"
@@ -85,15 +87,15 @@ function RegistrationModalView({show, onHide, change}) {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={onHide}>
-              Close
+              {t("CloseRform")}
             </Button>
 
             <Button variant="primary" onClick={openAdminRegistr}>
-              Registrate as Owner
+              {t("RegistrateAsOwner")}
             </Button>
             
             <Button variant="primary" onClick={Registrate}>
-              Registrate
+              {t("Registrate")}
             </Button>
           </Modal.Footer>
         </Modal>

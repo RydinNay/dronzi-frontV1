@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
 
 function TaskAdd({show, onHide, user}) {
@@ -8,6 +9,8 @@ function TaskAdd({show, onHide, user}) {
     const [weight, setWeight] = React.useState(null)
 
     const baseURL = "http://127.0.0.1:5000/Tasks/add";
+
+    const { t, i18n } = useTranslation()
 
     let catcherrors = null
     
@@ -41,24 +44,24 @@ function TaskAdd({show, onHide, user}) {
     aria-labelledby="example-modal-sizes-title-lg"
     >
         <Modal.Header closeButton onClick={onHide}>
-            <Modal.Title>Task Add Form</Modal.Title>
+            <Modal.Title>{t("TaskAddForm")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Card className="">
                 <Container className="m-1 me-auto ms-auto">
                 <Form>
                     <Form.Group className="mb-3" controlId="formDronModle">
-                        <Form.Label>Task description</Form.Label>
+                        <Form.Label>{t("TaskDesc")}</Form.Label>
                         <Form.Control type="text" placeholder="Task Description" onChange={e => setDescription(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formEnergyCap">
-                        <Form.Label>EnergyCapacity</Form.Label>
+                        <Form.Label>{t("Dist")}</Form.Label>
                         <Form.Control type="text" placeholder="How long can dron fly" onChange={e => setDistants(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formLiftingCap">
-                        <Form.Label>LiftingCapacity</Form.Label>
+                        <Form.Label>{t("Weight")}</Form.Label>
                         <Form.Control type="text" placeholder="How mach can lift this dron" onChange={e => setWeight(e.target.value)}/>
                     </Form.Group>
                     </Form>
@@ -68,7 +71,7 @@ function TaskAdd({show, onHide, user}) {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={() => addTask()}>
-                Add task
+                {t("AddTasks")}
             </Button>
             
         </Modal.Footer>

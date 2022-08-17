@@ -3,7 +3,6 @@ import Contacts from "../pages/Contacts";
 import Drons from "../pages/Drons/Drons";
 import Info from "../pages/Info";
 import Main from "../pages/Main";
-import Registration from "../pages/Registration";
 import Tasks from "../pages/Tasks/Tasks";
 import DronsOnTasks_for_User from "../pages/DronsOnTasks_for_User/DronsOnTasks_for_User";
 import DronsOnTasks_for_Client from "../pages/DronsOnTasks_for_Client/DronsOnTasks_for_Client";
@@ -22,10 +21,6 @@ export const publicRoutes = [
     {
         path: INFO_ROUTE,
         Component: <Info/>
-    },
-    {
-        path: REGISTRATION_ROUTE,
-        Component: <Registration/>
     }
 ]
 

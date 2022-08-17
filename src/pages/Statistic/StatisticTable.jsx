@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import {Container, Form, Table} from 'react-bootstrap'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -6,6 +7,8 @@ function StatisticTable({statistic}) {
 
     const dispatch = useDispatch();
     
+    const { t, i18n } = useTranslation()
+
     return (
     <Container>
     <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
@@ -13,10 +16,10 @@ function StatisticTable({statistic}) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Task Description</th>
-                <th>DronId</th>
-                <th>Status</th>
-                <th>Date</th>
+                <th>{t("TaskDesc")}</th>
+                <th>{t("DronId")}</th>
+                <th>{t("Status")}</th>
+                <th>{t("Date")}</th>
             </tr>
         </thead>
         <tbody id='table1'>

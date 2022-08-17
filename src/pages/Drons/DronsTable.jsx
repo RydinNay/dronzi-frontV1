@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {Container, Form, Table} from 'react-bootstrap'
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function DronsTable(drons) {
@@ -14,8 +15,8 @@ function DronsTable(drons) {
 
         const isOccupied = (dron)=>{
             if(dron.IsOccupied)
-                return 'yes'
-            else return 'no'
+                return t("OccupiedT")
+            else return t("OccupiedF")
         }
 
         const selectedDrons = (e)=>{
@@ -39,7 +40,9 @@ function DronsTable(drons) {
             
         }
         
-        //console.log(selectedDron)            
+        //console.log(selectedDron)   
+        
+        const { t, i18n } = useTranslation()
 
   return (
     <Container>
@@ -48,11 +51,11 @@ function DronsTable(drons) {
         <thead>
             <tr>
                 <th>id</th>
-                <th>Modle</th>
-                <th>EnergyCapacity</th>
-                <th>IsOccupied</th>
-                <th>LiftingCapacity</th>
-                <th>selected</th>
+                <th>{t("DronModle")}</th>
+                <th>{t("EnergyCapacity")}</th>
+                <th>{t("IsOccupied")}</th>
+                <th>{t("LiftingCapacity")}</th>
+                <th>{t("Selected")}</th>
             </tr>
         </thead>
         <tbody id='table1'>
@@ -68,7 +71,7 @@ function DronsTable(drons) {
                         <td>
                             
                             <Form.Check 
-                                label="select"
+                                label={t("Selected")}
                                 type="checkbox"
                                 id={dron.Dronid}
                                 value={CheckIsDronGenderFilter}

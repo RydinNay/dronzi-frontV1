@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { useTranslation } from 'react-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -62,16 +63,17 @@ function LoginModalView({show, onHide}) {
       
     }
     
+    const { t, i18n } = useTranslation()
 
   return (
     <Modal show={show} onHide={onHide}  backdrop="static">
         <Modal.Header closeButton onClick={onHide}>
-          <Modal.Title>Login Form</Modal.Title>
+          <Modal.Title>{t("Lform")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Enter your Email address</Form.Label>
+                <Form.Label>{t("EnterEmailLform")}</Form.Label>
                 <Form.Control
                     type="email"
                     placeholder="name@example.com"
@@ -80,7 +82,7 @@ function LoginModalView({show, onHide}) {
                 />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                <Form.Label>Enter your Password</Form.Label>
+                <Form.Label>{t("EnterPassLform")}</Form.Label>
                 <Form.Control
                     type="password"
                     placeholder="pass"
@@ -91,7 +93,7 @@ function LoginModalView({show, onHide}) {
                 <Form.Check 
                       type="checkbox"
                       id={`1`}
-                      label={`Is User`}
+                      label={t("isUserLform")}
                       value={CheckIsUserGenderFilter}
                       onChange={(e)=>{setCheckIsUserGenderValue(e.target.checked)}}
                   />
@@ -102,7 +104,7 @@ function LoginModalView({show, onHide}) {
             change this later
           </Button>
           <Button variant="primary" onClick={Login}>
-            Login
+            {t("LoginLform")}
           </Button>
         </Modal.Footer>
       </Modal>

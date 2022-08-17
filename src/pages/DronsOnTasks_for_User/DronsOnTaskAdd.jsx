@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
 import { Button, Modal, Card } from 'react-bootstrap'
 import DronTable from './DronTable';
 import Task from './TaskTable';
@@ -9,6 +10,8 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     const dispatch = useDispatch();
 
     //const baseURL = "http://127.0.0.1:5000/Drons_on_Tasks/select/user";
+
+    const { t, i18n } = useTranslation()
 
     const handleClick = () => {
         
@@ -101,7 +104,7 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     aria-labelledby="example-modal-sizes-title-lg"
     >
         <Modal.Header closeButton onClick={Close}>
-            <Modal.Title>Add drons on tasks form</Modal.Title>
+            <Modal.Title>{t("AddDronsOnTasksForm")}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <Card>
@@ -114,13 +117,13 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={() => refreshTable()}>
-                Refresh Table
+                {t("RefreshTable")}
             </Button>
             <Button variant="primary" onClick={() => addDron()}>
-                Add selected dron on selected tasks
+                {t("AddSelectedDronOnSelectedTasks")}
             </Button>
             <Button variant="primary" onClick={() => autoAddDron()}>
-                Add drons on all tasks
+                {t("AddDronsOnAllTasks")}
             </Button>
 
         </Modal.Footer>
