@@ -16,19 +16,12 @@ import DropdownMenu from 'react-bootstrap/esm/DropdownMenu';
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 
-
 function Header () {
     const navigate = navLinkNavigation(useNavigate())
     const dispatch = useDispatch()
-    //console.log(userStore)
     const [adminRegistrationVisible, setAdminRegistrationVisible] = useState(false)
     const [loginVisible, setLoginVisible] = useState(false)
     const [registrationVisible, setRegistrationVisible] = useState(false)
-    /*
-    const isAuth = useState(JSON.parse(sessionStorage.getItem("isAuth")))
-    const isUser = useState(JSON.parse(sessionStorage.getItem("isUser")))
-    const isAdmin = useState(JSON.parse(sessionStorage.getItem("isAdmin")))
-    */
     const { isAuth } = useSelector(state => ({
         isAuth: state.users.isAuth
     }), shallowEqual)
@@ -40,11 +33,6 @@ function Header () {
     }), shallowEqual)
 
     const getElement = () => {
-        /*const elements :{
-            admin: <Nav.Link onClick={()=>navigate('/admin')}>Admin</Nav.Link>
-
-        }
-        */
         if(isAuth === true && isUser === true && isAdmin=== true){
             return <AdminElements/>
         }
@@ -64,10 +52,7 @@ function Header () {
           })
     }
 
-
     const { t, i18n } = useTranslation()
-
-
 
     return (
         <Navbar bg="dark" variant="dark">   

@@ -9,6 +9,13 @@ function StatisticTable({statistic}) {
     
     const { t, i18n } = useTranslation()
 
+    const Status = (status)=>{
+        if(status)
+            return t("Succeed")
+        else return t("Faild")
+    }
+
+    //console.log(statistic)
     return (
     <Container>
     <Table striped bordered hover variant="dark" className="m-2 me-auto ms-auto" >
@@ -30,7 +37,7 @@ function StatisticTable({statistic}) {
                         <td>{statistic.Statisticid}</td>
                         <td>{statistic.TaskDesc}</td>
                         <td>{statistic.Dronid}</td>      
-                        <td>{statistic.Status}</td>                                          
+                        <td>{Status(statistic.Status)}</td>                                          
                         <td>{statistic.Data}</td>
                     </tr>
             )

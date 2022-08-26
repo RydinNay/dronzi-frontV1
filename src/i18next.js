@@ -46,7 +46,7 @@ i18n.use(initReactI18next).init({
                 AddTasks:"Add Tasks",
                 DeleteSelectedTasks:"Delete Selected Tasks",
                 TaskAddForm:"Task Add Form",
-                AddTask:"Add task",
+                TaskDateTime:"Task DateTime",
 
 
                 Date:"Date",
@@ -74,6 +74,8 @@ i18n.use(initReactI18next).init({
                 
 
                 Status:"Status",
+                Succeed:"Succeed",
+                Faild:"Faild",
 
 
                 ChangeLanguage:"Змінити мову",
@@ -142,7 +144,7 @@ i18n.use(initReactI18next).init({
                 AddTasks:"Додати задачу",
                 DeleteSelectedTasks:"Видалити вибрані задачі",
                 TaskAddForm:"Форма додавання завдань",
-                AddTask:"Додати задачу",
+                TaskDateTime:"Время и дата задания",
 
 
                 Date:"Дата",
@@ -171,6 +173,8 @@ i18n.use(initReactI18next).init({
                 
 
                 Status:"Статус",
+                Succeed:"Успешно",
+                Faild:"Провалено",
 
 
                 ChangeLanguage:"Change language",

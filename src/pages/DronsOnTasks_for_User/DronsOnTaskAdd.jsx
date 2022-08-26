@@ -1,14 +1,18 @@
 import React from 'react'
 import axios from 'axios'
 import { useTranslation } from 'react-i18next';
-import { Button, Modal, Card } from 'react-bootstrap'
+import { Button, Modal, Card, Toast } from 'react-bootstrap'
 import DronTable from './DronTable';
 import Task from './TaskTable';
+import Toasts from './Toasts';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     const dispatch = useDispatch();
 
+    const [showA, setShowA] = React.useState(false);
+
+    const toggleShowA = () => setShowA(!showA);
     //const baseURL = "http://127.0.0.1:5000/Drons_on_Tasks/select/user";
 
     const { t, i18n } = useTranslation()
@@ -58,20 +62,22 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     }
 
     const addDron=()=>{
-        
-        axios.post("http://127.0.0.1:5000/Drons_on_Tasks/add/common", 
-            {"drons": selectedDron, "tasks": selectedTask, "baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
-            ).
-            then((response) => {
-            
-            catcherrors = (response.data);
-            console.log(catcherrors)
-            })
-            .catch((error) => {
-            console.log(error)
-        });
-        Close()
-        
+        if(selectedDron.length != 0 || selectedTask.length != 0){
+            axios.post("http://127.0.0.1:5000/Drons_on_Tasks/add/common", 
+                {"drons": selectedDron, "tasks": selectedTask, "baseid":user.dron_baseid}, {headers:{"Content-Type": "application/json"}} 
+                ).
+                then((response) => {
+                
+                catcherrors = (response.data);
+                console.log(catcherrors)
+                })
+                .catch((error) => {
+                console.log(error)
+            });
+            Close()
+        }else{
+            setShowA()
+        }
     }
 
     const autoAddDron=()=>{
@@ -90,6 +96,7 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     }
 
     const Close=()=>{
+        setShowA(false)
         refreshTable()
         onHide()
     }
@@ -100,11 +107,14 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
     <Modal  onHide={Close}
     size="xl"
     show={show}
-        
+    backdrop="static"
     aria-labelledby="example-modal-sizes-title-lg"
     >
         <Modal.Header closeButton onClick={Close}>
             <Modal.Title>{t("AddDronsOnTasksForm")}</Modal.Title>
+            <Toast show={showA} onClose={toggleShowA}>
+                <Toast.Body>There are no selected drons or tasks</Toast.Body>
+            </Toast>
         </Modal.Header>
         <Modal.Body>
             <Card>
@@ -113,7 +123,7 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
                 <DronTable dron={dron}/>
 
             </Card>
-
+            
         </Modal.Body>
         <Modal.Footer>
             <Button variant="primary" onClick={() => refreshTable()}>
@@ -125,7 +135,7 @@ function DronsOnTaskAdd({show, onHide, drons, tasks, user}) {
             <Button variant="primary" onClick={() => autoAddDron()}>
                 {t("AddDronsOnAllTasks")}
             </Button>
-
+            
         </Modal.Footer>
     </Modal>  
     )

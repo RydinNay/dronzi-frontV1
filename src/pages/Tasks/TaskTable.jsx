@@ -41,6 +41,12 @@ function TasksTable(tasks) {
             })     
             
         }
+
+        const dateGet = (datetime)=>{
+            const date = new Date(datetime)
+            return 'Date: '+date.getFullYear()+ '.'+ date.getMonth()+ '.'+ date.getDate()+' Time: '+date.getHours()+':'+date.getMinutes()
+        }
+
         
   return (
     <Container>
@@ -67,7 +73,7 @@ function TasksTable(tasks) {
                         <td>{task.Dist}</td>
                         <td>{isOccupied(task)}</td>
                         <td>{task.Weight}</td>
-                        <td>{task.Date}</td>
+                        <td>{dateGet(task.Date)}</td>
                         <td>
                             
                             <Form.Check 

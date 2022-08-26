@@ -51,7 +51,6 @@ function DronsOnTasksTable_for_Client({dronOnTask, tasks, drons}) {
                 <th>{t("Weight")}</th>
                 <th>{t("TaskDesc")}</th>
                 <th>{t("Date")}</th>
-                <th>{t("Selected")}</th>
             </tr>
         </thead>
         <tbody id='table1'>
@@ -69,17 +68,7 @@ function DronsOnTasksTable_for_Client({dronOnTask, tasks, drons}) {
                         <td>{tasks.find(taskdesc => taskdesc.Taskid === drontask.DoTTaskid).TaskDesc}</td>
                         
                         <td>{drontask.Date}</td>
-                        <td>
-                            
-                            <Form.Check 
-                                label="select"
-                                type="checkbox"
-                                id={drontask.DronTaskid}
-                                value={CheckIsDronGenderFilter}
-                                onChange={(e)=>{selectedDrons(e)}}
-                            />
-                            
-                        </td>
+                        
                     </tr>
             )
         }

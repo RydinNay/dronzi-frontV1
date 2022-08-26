@@ -2,11 +2,13 @@ import React from 'react'
 import axios from 'axios'
 import { useTranslation } from 'react-i18next';
 import { Button, Form, Modal,Card, Container } from 'react-bootstrap'
+import DateTimePicker from 'react-datetime-picker';
 
 function TaskAdd({show, onHide, user}) {
     const [description, setDescription] = React.useState(null)
     const [distants, setDistants] = React.useState(null)
     const [weight, setWeight] = React.useState(null)
+    const [datetime, setDatetime] = React.useState(new Date())
 
     const baseURL = "http://127.0.0.1:5000/Tasks/add";
 
@@ -14,21 +16,25 @@ function TaskAdd({show, onHide, user}) {
 
     let catcherrors = null
     
+    console.log(new Date())
+    console.log(datetime)
+
     const addTask=()=>{
+        console.log(datetime)
 
-        if(!isNaN(weight) && !isNaN(distants)){
+        if(!isNaN(weight) && !isNaN(distants) && datetime > new Date()){
 
-        axios.post(baseURL, 
-            {"desc":description, "dist":distants, "weight":weight, "clientid":user.id}, {headers:{"Content-Type": "application/json"}} 
-            ).
-            then((response) => {
-            
-            catcherrors = (response.data);
-            console.log(catcherrors)
-            })
-            .catch((error) => {
-            console.log(error)
-        });
+            axios.post(baseURL, 
+                {"desc":description, "dist":distants, "weight":weight, "clientid":user.id, "datetime":datetime}, {headers:{"Content-Type": "application/json"}} 
+                ).
+                then((response) => {
+                
+                catcherrors = (response.data);
+                console.log(catcherrors)
+                })
+                .catch((error) => {
+                console.log(error)
+            });
         onHide()
         }else
             console.log('is not int', description)
@@ -64,6 +70,10 @@ function TaskAdd({show, onHide, user}) {
                         <Form.Label>{t("Weight")}</Form.Label>
                         <Form.Control type="text" placeholder="How mach can lift this dron" onChange={e => setWeight(e.target.value)}/>
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="formDronModle">
+                        <Form.Label>{t("TaskDateTime")}</Form.Label>
+                    </Form.Group>
+                    <DateTimePicker onChange={(newValue) => {setDatetime(newValue)}} value={datetime} label="DateTimePicker"/>
                     </Form>
                 </Container>
                 

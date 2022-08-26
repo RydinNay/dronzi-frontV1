@@ -29,7 +29,7 @@ function DronsOnTasks_for_Client() {
     const [drons, setDrons] = React.useState(null);
 
     useEffect(() => {
-      axios.get(baseURL, {params:{"clientid": user.Userid}}).then((response) => {
+      axios.get(baseURL, {params:{"clientid": user.id}}).then((response) => {
           setDronOnTask(response.data)
       })
       
@@ -38,35 +38,31 @@ function DronsOnTasks_for_Client() {
     //console.log(dronForClient)
 
     useEffect(() => {
-      axios.get("http://127.0.0.1:5000/Tasks/select", {params:{"clientid": 1}}).then((response) => {
+      axios.get("http://127.0.0.1:5000/Tasks/select", {params:{"clientid": user.id}}).then((response) => {
           setTasks(response.data)
       }) 
     }, [])
   
     useEffect(() => {
-      axios.get("http://127.0.0.1:5000/Dron/select_for_client", {params:{"clientid":1}}).then((response) => {
+      axios.get("http://127.0.0.1:5000/Dron/select_for_client", {params:{"clientid":user.id}}).then((response) => {
         setDrons(response.data)
       })
     }, [])
     console.log(dronOnTask)
     console.log(tasks)
     console.log(drons)
+
+
     const refreshTable=() => {
-      
-        for(var i=0; i<dronOnTask.length; ++i)
-        {
-            var boxes = document.getElementById(dronOnTask[i].DronTaskid);
-            boxes.checked = false;  
-        }
-        axios.get(baseURL, {params:{"clientid": 1}}).then((response) => {
+        axios.get(baseURL, {params:{"clientid": user.id}}).then((response) => {
             setDronOnTask(response.data);
         })
   
-        axios.get("http://127.0.0.1:5000/Tasks/select",  {params:{"clientid": 1}}).then((response) => {
+        axios.get("http://127.0.0.1:5000/Tasks/select",  {params:{"clientid": user.id}}).then((response) => {
           setTasks(response.data)
         })
   
-        axios.get("http://127.0.0.1:5000/Dron/select_for_client", {params:{"clientid":1}}).then((response) => {
+        axios.get("http://127.0.0.1:5000/Dron/select_for_client", {params:{"clientid":user.id}}).then((response) => {
           setDrons(response.data)
         })
       
