@@ -6,8 +6,21 @@ i18n.use(initReactI18next).init({
         en: {
             translations: {
                 Main:"Main",
+                Wlcome:"Welcome to our servise Dronzi",
+                YouCan:"Here you can manage your DronBase or take the order",
+
                 Contacts:"Contacts",
+                HereYou:"Here are the contacts you can contact in case of an error ",
+                OurEmail:"Our mailbox: Dronzi@gmail.com",
+                ContactName:"The name of the person to contact: Danil",
+                ContactTel:"+3809**********",
+
                 Info:"Info",
+                InfoHead:"Here you can find informations about the project Dronzi",
+                InfoName:"Owner and developer of the project: Yasir Danyl Andriyovych",
+                InfoDate:"Date of project development: 08/20/2022",
+                InfoText:"This project was developed as a coursework in the discipline of Software Architecture",
+                
                 Out:"Out",
 
                 InspectDrons:"Inspect Drons",
@@ -104,8 +117,21 @@ i18n.use(initReactI18next).init({
         ua: {
             translations: {
                 Main:"Головна",
+                Wlcome:"Ласкаво просимо до нашого сервісу Dronzi",
+                YouCan:"Тут ві можете зареєструвати власну базу дронів, або зробити заказ",
+
                 Contacts:"Контакти",
+                HereYou:"Тут знаходяться контакті за якими ви можете звернутись у разі помилки",
+                OurEmail:"Наша поштова скринька: Dronzi@gmail.com",
+                ContactName:"Ім'я особи до якої звертатись: Данил",
+                ContactTel:"+3809**********",
+
                 Info:"Информція",
+                InfoHead:"Тут ви можете знайти інформацію про проект Dronzi",
+                InfoName:"Власник і розроботчик проекту: Ясир Данил Андрійович",
+                InfoDate:"Дата розробки проекту: 20.08.2022",
+                InfoText:"Цей проект був розроблений в якості курсової роботи з дисципліни Архітектура Програмного Забезпечення",
+
                 Out:"Вихід",
 
 

@@ -30,8 +30,6 @@ function Drons() {
     
   }, [])
 
-
-
   const refreshTable=() => {
 
     for(var i=0; i<drons.length; ++i)
