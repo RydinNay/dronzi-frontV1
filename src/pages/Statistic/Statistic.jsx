@@ -21,21 +21,7 @@ function Statistic() {
       })
       
     }, [])
-    //console.log(dronOnTask)
-    //console.log(dronForClient)
-    /*
-    useEffect(() => {
-      axios.get("http://127.0.0.1:5000/Tasks/select", {params:{"clientid": 1}}).then((response) => {
-          setTasks(response.data)
-      }) 
-    }, [])
-  
-    useEffect(() => {
-      axios.get("http://127.0.0.1:5000/Dron/select_for_client", {params:{"clientid":1}}).then((response) => {
-        setDrons(response.data)
-      })
-    }, [])
-    */
+    
     const refreshTable=() => {
         axios.get("http://127.0.0.1:5000/Statistic", {params:{"baseid": user.dron_baseid}}).then((response) => {
             setStatisticDronOnTask(response.data.data);
